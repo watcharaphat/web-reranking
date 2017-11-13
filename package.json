@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "A Web IR project",
   "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src -d build --source-maps inline",
+    "start": "npm run build && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": "https://github.com/watcharaphat/web-reranking",
   "author": "watcharaphat <watcharaphat.3166@gmail.com>",
   "license": "MIT",
   "private": null,
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
   }
 }
