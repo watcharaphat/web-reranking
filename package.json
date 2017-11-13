@@ -1,0 +1,13 @@
+{
+  "name": "web-reranking",
+  "version": "1.0.0",
+  "description": "A Web IR project",
+  "main": "index.js",
+  "repository": "https://github.com/watcharaphat/web-reranking",
+  "author": "watcharaphat <watcharaphat.3166@gmail.com>",
+  "license": "MIT",
+  "private": null,
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
