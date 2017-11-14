@@ -1,9 +1,8 @@
 const recursive = require('recursive-readdir');
 
 const dataPath = '/Users/watcharaphat/project/web-indexer/data';
-const proto = 'http://';
 
-export async function getURLMap() {
+export async function getFiles() {
   let files;
   try {
     files = await recursive(dataPath);
@@ -11,5 +10,5 @@ export async function getURLMap() {
     console.error('Cannot get files', error);
   }
 
-  return files.map(file => proto.concat(file.slice(45)));
+  return files;
 }
