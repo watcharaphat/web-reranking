@@ -7,7 +7,7 @@ export function writeToFile(filePath, data) {
   });
 
   data.forEach((row) => {
-    file.write(row.concat('\n'));
+    file.write(row.toString().concat('\n'));
   });
   file.end();
 }

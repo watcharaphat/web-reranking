@@ -38,7 +38,8 @@ async function main() {
     });
     webGraph[i] = linkGraph;
   }
-  console.log(webGraph);
+
+  writeToFile('result/webgraph.txt', webGraph);
 }
 
 main();
