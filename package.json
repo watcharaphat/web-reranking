@@ -24,6 +24,9 @@
     "eslint-plugin-import": "^2.8.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
+    "cheerio": "^1.0.0-rc.2",
+    "fs": "^0.0.1-security",
     "recursive-readdir": "^2.2.1"
   }
 }
