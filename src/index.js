@@ -13,7 +13,7 @@ async function main() {
 
   const urlMap = files.map(file => proto.concat(file.slice(45)));
 
-  for (let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i += 1) {
     const file = files[i];
 
     let html;
@@ -25,16 +25,19 @@ async function main() {
     }
     const $ = cheerio.load(html);
 
-    if (i <= 10) {
-      console.log(`File: ${file}\n`);
-      const links = $('a');
-      $(links).each((index, link) => {
-        console.log($(link).attr('href'));
-      });
-
-      console.log('*********************************\n');
-    }
+    const links = $('a');
+    const linkGraph = [];
+    $(links).each((j, link) => {
+      const href = $(link).attr('href');
+      const index = urlMap.indexOf(href);
+      if (index !== -1 && linkGraph.indexOf(href) === -1) {
+        linkGraph.push(index);
+      }
+    });
+    webGraph[i] = linkGraph;
   }
+
+  console.log(webGraph);
 }
 
 main();
