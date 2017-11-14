@@ -1,4 +1,5 @@
 import { getFiles } from './getFiles';
+import { writeToFile } from './modules/utils/writeToFile';
 
 const fs = require('fs');
 const Promise = require('bluebird');
@@ -12,6 +13,7 @@ async function main() {
   const webGraph = [];
 
   const urlMap = files.map(file => proto.concat(file.slice(45)));
+  writeToFile('result/urlmap.txt', urlMap);
 
   for (let i = 0; i < files.length; i += 1) {
     const file = files[i];
@@ -36,7 +38,6 @@ async function main() {
     });
     webGraph[i] = linkGraph;
   }
-
   console.log(webGraph);
 }
 
