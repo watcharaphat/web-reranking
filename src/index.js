@@ -52,28 +52,29 @@ async function main() {
   const linkProb = 0.85;
   const torelance = 0.0000000001;
   console.log('Page ranking');
-  let pageScore;
-  // Pagerank(webGraph, linkProb, torelance, (err, result) => {
-  //   if (err) {
-  //     console.log('Error on Pagerank.', err);
-  //   } else {
-  //     pageScore = result;
-  //     console.log(pageScore);
-  //   }
-  // });
+  let pageScores;
+
+  const virtualLinks = [];
+  for (let i = 0; i < webGraph.length; i += 1) {
+    virtualLinks.push(i);
+  }
+
+  const G = webGraph.map((edges) => {
+    if (!edges.length) {
+      return virtualLinks;
+    }
+
+    return edges;
+  });
 
   try {
-    pageScore = await pageRank(webGraph, linkProb, torelance);
+    pageScores = await pageRank(G, linkProb, torelance);
   } catch (err) {
     console.log('Error on pagerank.', err);
   }
-  console.log(pageScore);
 
-  let sum = 0;
-  pageScore.forEach((score) => {
-    sum += score;
-  });
-  console.log(`sum: ${sum}`);
+  writeToFile('result/page_scores.txt', pageScores);
+  console.log('Done.');
 }
 
 main();
