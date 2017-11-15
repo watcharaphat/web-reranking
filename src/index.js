@@ -5,8 +5,10 @@ import { absolutePath } from './absolutePath';
 const fs = require('fs');
 const Promise = require('bluebird');
 const cheerio = require('cheerio');
+const P = require('pagerank-js');
 
 const readFile = Promise.promisify(fs.readFile);
+const pageRank = Promise.promisify(P);
 
 async function main() {
   const proto = 'http://';
@@ -14,6 +16,7 @@ async function main() {
   const webGraph = [];
 
   const urlMap = files.map(file => proto.concat(file.slice(45)));
+  console.log('Construct urlMap: Done');
   writeToFile('result/urlmap.txt', urlMap);
 
   for (let i = 0; i < files.length; i += 1) {
@@ -43,7 +46,34 @@ async function main() {
     webGraph[i] = linkGraph;
   }
 
+  console.log('Construct webGraph: Done');
   writeToFile('result/webgraph.txt', webGraph);
+
+  const linkProb = 0.85;
+  const torelance = 0.0000000001;
+  console.log('Page ranking');
+  let pageScore;
+  // Pagerank(webGraph, linkProb, torelance, (err, result) => {
+  //   if (err) {
+  //     console.log('Error on Pagerank.', err);
+  //   } else {
+  //     pageScore = result;
+  //     console.log(pageScore);
+  //   }
+  // });
+
+  try {
+    pageScore = await pageRank(webGraph, linkProb, torelance);
+  } catch (err) {
+    console.log('Error on pagerank.', err);
+  }
+  console.log(pageScore);
+
+  let sum = 0;
+  pageScore.forEach((score) => {
+    sum += score;
+  });
+  console.log(`sum: ${sum}`);
 }
 
 main();
