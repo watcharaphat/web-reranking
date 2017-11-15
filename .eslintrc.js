@@ -4,5 +4,6 @@ module.exports = {
         "no-console": 0,
         "import/prefer-default-export": 0,
         "no-await-in-loop": 0,
+        "no-continue": 0,
     },
 };

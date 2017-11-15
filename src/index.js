@@ -1,5 +1,6 @@
 import { getFiles } from './getFiles';
 import { writeToFile } from './modules/utils/writeToFile';
+import { absolutePath } from './absolutePath';
 
 const fs = require('fs');
 const Promise = require('bluebird');
@@ -30,10 +31,14 @@ async function main() {
     const links = $('a');
     const linkGraph = [];
     $(links).each((j, link) => {
+
       const href = $(link).attr('href');
-      const index = urlMap.indexOf(href);
-      if (index !== -1 && linkGraph.indexOf(href) === -1) {
-        linkGraph.push(index);
+      if (href) {
+        console.log(href.split('//'));
+        const index = urlMap.indexOf(href);
+        if (index !== -1 && linkGraph.indexOf(href) === -1) {
+          linkGraph.push(index);
+        }
       }
     });
     webGraph[i] = linkGraph;
