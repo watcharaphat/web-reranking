@@ -11,5 +11,7 @@ cd web-reranking
 
 npm install
 
+mkdir result
+
 npm start
 ```
