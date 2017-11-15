@@ -31,12 +31,11 @@ async function main() {
     const links = $('a');
     const linkGraph = [];
     $(links).each((j, link) => {
-
       const href = $(link).attr('href');
       if (href) {
-        console.log(href.split('//'));
-        const index = urlMap.indexOf(href);
-        if (index !== -1 && linkGraph.indexOf(href) === -1) {
+        const urlPath = absolutePath(urlMap[i], href);
+        const index = urlMap.indexOf(urlPath);
+        if (index !== -1 && linkGraph.indexOf(urlPath) === -1) {
           linkGraph.push(index);
         }
       }
