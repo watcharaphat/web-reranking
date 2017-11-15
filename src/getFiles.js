@@ -1,8 +1,6 @@
 const recursive = require('recursive-readdir');
 
-const dataPath = '/Users/watcharaphat/project/web-indexer/html';
-
-export async function getFiles() {
+export async function getFiles(dataPath) {
   let files;
   try {
     files = await recursive(dataPath);

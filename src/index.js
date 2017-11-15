@@ -12,7 +12,9 @@ const pageRank = Promise.promisify(P);
 
 async function main() {
   const proto = 'http://';
-  const files = await getFiles();
+  const dataPath = '/Users/watcharaphat/project/web-indexer/html';
+
+  const files = await getFiles(dataPath);
   const webGraph = [];
 
   const urlMap = files.map(file => proto.concat(file.slice(45)));
